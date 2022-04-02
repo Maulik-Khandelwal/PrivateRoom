@@ -125,7 +125,7 @@ class RoomItemWidget extends StatelessWidget {
         SizedBox(height: 5),
         Text(
           'Room ID ${roomData[kRoomId]}',
-          style: kLabelTextStyle,
+          style: kLabelTextStyle.copyWith(color: kLightBlue),
           textAlign: TextAlign.start,
         ),
         SizedBox(height: 10),
@@ -191,12 +191,12 @@ class RoomItemWidget extends StatelessWidget {
 
     final roomIdText = Text(
       'Room ID: ${roomData[kRoomId]}',
-      style: kGeneralTextStyle.copyWith(fontSize: 15, color: kBlack),
+      style: kGeneralTextStyle.copyWith(fontSize: 15, color: kLightBlue),
     );
 
     final createdAtText = Text(
       'created at ${roomData[kRoomCreationDate]}',
-      style: kLabelTextStyle.copyWith(fontSize: 15, color: kBlack),
+      style: kLabelTextStyle.copyWith(fontSize: 15, color: kLightBlue),
     );
 
     return Card(

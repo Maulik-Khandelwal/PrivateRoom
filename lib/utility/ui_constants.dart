@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 const Color kImperialRed = Color(0xfff15944);
 const Color kWhite = Color(0xffFFFFFF);
 const Color kSteelBlue = Color(0xff266a68);
-const Color kLightBlue = Color(0xffa3d3cb);
+const Color kLightBlue = Color(0xff93BFBB);
 const Color kBlack = Color(0xff000000);
 
 const kLightestTextStyle = TextStyle(
