@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:privateroom/retro/retroTextField.dart';
+import 'package:privateroom/retro/retro_button.dart';
+import 'package:privateroom/retro/stylized_text.dart';
 
+import '../../../retro/back_button.dart';
+import '../../../utility/ui_constants.dart';
+import '../../dashboard_screen/top_bar.dart';
 import '../providers/timer_state_provider.dart';
 
 class TimeSelectPage extends StatefulWidget {
@@ -27,76 +33,54 @@ class _TimeSelectPageState extends State<TimeSelectPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Container(
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage("assets/bg.png"),
-              fit: BoxFit.cover,
-            ),
-          ),
+    return Scaffold(
+      body: Stack(
+        children: [SafeArea(
+      child: Container(
+      color: kImperialRed,
           child: Padding(
             padding:
-                const EdgeInsets.symmetric(horizontal: 12.0, vertical: 12.0),
+                const EdgeInsets.symmetric(horizontal: 12.0, vertical: 120.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                IconButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  icon: const Icon(
-                    Icons.arrow_back,
-                  ),
-                ),
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 150),
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
+                        StylizedText(text: "Timer Block", style: TextStyle(fontSize: 30, color: Colors.white),),
+                        SizedBox(height: 40,),
                         Text(
                           "Set timer for (minutes): ",
                           style: Theme.of(context).textTheme.titleLarge,
                         ),
-                        TextField(
-                          controller: _controller,
-                          style: Theme.of(context).textTheme.titleMedium,
-                          decoration: const InputDecoration(
-                            focusedBorder: OutlineInputBorder(),
-                            enabledBorder: OutlineInputBorder(),
-                            hintText: 'Minutes',
-                          ),
-                        ),
-                        Material(
-                          type: MaterialType.transparency,
-                          child: Card(
-                            color: const Color(0xff8A93E9),
-                            child: InkWell(
-                              borderRadius: BorderRadius.circular(12),
-                              onTap: () {
-                                int minutes = int.parse(_controller.value.text);
-                                ChangeNotifierProvider<TimerStateProvider>
-                                    provider = ChangeNotifierProvider(
-                                  (_) => TimerStateProvider(
-                                    duration: Duration(minutes: minutes),
-                                  ),
-                                );
-                                widget.callback(provider);
-                              },
-                              child: Container(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 30.0,
-                                  vertical: 16.0,
-                                ),
-                                child: Text("Begin",
-                                    style:
-                                        Theme.of(context).textTheme.titleLarge),
-                              ),
+                        addressTextField(context, text: _controller, hint: 'Minutes'),
+                        // TextField(
+                        //   controller: _controller,
+                        //   style: Theme.of(context).textTheme.titleMedium,
+                        //   decoration: const InputDecoration(
+                        //     focusedBorder: OutlineInputBorder(),
+                        //     enabledBorder: OutlineInputBorder(),
+                        //     hintText: 'Minutes',
+                        //   ),
+                        // ),
+                        GestureDetector(child: RelicBazaarStackedView(child: Center(
+
+                          child: Text("Begin",
+                              style:
+                              Theme.of(context).textTheme.titleLarge),
+                        ),upperColor: Colors.white, height: 50, width: 120,),onTap: () {
+                          int minutes = int.parse(_controller.value.text);
+                          ChangeNotifierProvider<TimerStateProvider>
+                          provider = ChangeNotifierProvider(
+                                (_) => TimerStateProvider(
+                              duration: Duration(minutes: minutes),
                             ),
-                          ),
-                        ),
+                          );
+                          widget.callback(provider);
+                        },)
                       ],
                     ),
                   ),
@@ -106,6 +90,14 @@ class _TimeSelectPageState extends State<TimeSelectPage> {
           ),
         ),
       ),
+          TopBar(height: 100,),
+          Align(
+              alignment: Alignment.topLeft,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(15, 100, 0, 0),
+                child: appBarBackButton(context, const Icon(Icons.arrow_back, color: kBlack), (){Navigator.pop(context);}, 35, 35),
+              )
+          )])
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:privateroom/retro/back_button.dart';
 import 'package:privateroom/utility/ui_constants.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -22,61 +23,64 @@ class NavigationControls extends StatelessWidget {
             snapshot.connectionState == ConnectionState.done;
         final WebViewController controller = snapshot.data;
         return Container(
-          color: kImperialRed.withOpacity(0.1),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              IconButton(
-                icon: const Icon(
-                  FontAwesomeIcons.chevronLeft,
-                  color: kImperialRed,
-                ),
-                onPressed: !webViewReady
-                    ? null
-                    : () async {
-                        if (await controller.canGoBack()) {
-                          await controller.goBack();
-                        }
-                      },
+          color: kImperialRed,
+          child: Column(
+            children: [
+              SizedBox(height: 20,),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  appBarBackButton(context, Icon(
+                    FontAwesomeIcons.chevronLeft,
+                    color: Colors.black,
+                  ), !webViewReady
+                      ? null
+                      : () async {
+                    if (await controller.canGoBack()) {
+                      await controller.goBack();
+                    }
+                  }, 35, 35),
+                  appBarBackButton(context,
+                    Icon(
+                      FontAwesomeIcons.chevronRight,
+                      color: Colors.black,
+                    ),
+                    !webViewReady
+                        ? null
+                        : () async {
+                            if (await controller.canGoForward()) {
+                              await controller.goForward();
+                            }
+                          }, 35, 35
+                  ),
+                  appBarBackButton(context,
+                    const Icon(
+                      FontAwesomeIcons.redo,
+                      color: Colors.black,
+                    ),
+                    !webViewReady
+                        ? null
+                        : () {
+                            controller.reload();
+                          }, 35, 35
+                  ),
+                  appBarBackButton(context,
+                    const Icon(
+                      FontAwesomeIcons.expand,
+                      color: Colors.black,
+                    ),
+                    () => toggleFullScreen(), 35, 35
+                  ),
+                  appBarBackButton(context,
+                    const Icon(
+                      FontAwesomeIcons.times,
+                      color: Colors.black,
+                    ),
+                    () => toggleBrowser(), 35, 35
+                  ),
+                ],
               ),
-              IconButton(
-                icon: const Icon(
-                  FontAwesomeIcons.chevronRight,
-                  color: kImperialRed,
-                ),
-                onPressed: !webViewReady
-                    ? null
-                    : () async {
-                        if (await controller.canGoForward()) {
-                          await controller.goForward();
-                        }
-                      },
-              ),
-              IconButton(
-                icon: const Icon(
-                  FontAwesomeIcons.redo,
-                  color: kImperialRed,
-                ),
-                onPressed: !webViewReady
-                    ? null
-                    : () {
-                        controller.reload();
-                      },
-              ),
-              IconButton(
-                icon: const Icon(
-                  FontAwesomeIcons.expand,
-                  color: kImperialRed,
-                ),
-                onPressed: () => toggleFullScreen(),
-              ),
-              IconButton(
-                icon: const Icon(
-                  FontAwesomeIcons.times,
-                  color: kImperialRed,
-                ),
-                onPressed: () => toggleBrowser(),
-              ),
+              SizedBox(height: 10,)
             ],
           ),
         );

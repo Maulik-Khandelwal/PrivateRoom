@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:privateroom/retro/retro_button.dart';
 import 'package:privateroom/screens/drawing_screen/drawing_screen.dart';
 import 'package:privateroom/services/encoding_decoding_service.dart';
 import 'package:privateroom/utility/firebase_constants.dart';
@@ -126,21 +127,26 @@ class TileItem extends StatelessWidget {
         Navigator.pop(context);
         onTap();
       },
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Icon(
-            iconData,
-            color: kImperialRed,
-            size: 35.0,
-          ),
-          SizedBox(height: 10.0),
-          Text(
-            title,
-            style: kLabelTextStyle,
-            textAlign: TextAlign.center,
-          ),
-        ],
+      child: RelicBazaarStackedView(
+        upperColor: Colors.white,
+        height: 80,
+        width: 100,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Icon(
+              iconData,
+              color: Colors.black,
+              size: 35.0,
+            ),
+            SizedBox(height: 10.0),
+            Text(
+              title,
+              style: kLabelTextStyle,
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
       ),
     );
   }

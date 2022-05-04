@@ -15,11 +15,13 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      scrollBehavior: ScrollBehavior().copyWith(physics: BouncingScrollPhysics()),
-      theme: ThemeData(accentColor: kImperialRed, primaryColor: kImperialRed, fontFamily: GoogleFonts.poppins().fontFamily,),
+      scrollBehavior: ScrollBehavior().copyWith(physics: const BouncingScrollPhysics()),
+      theme: ThemeData(accentColor: kImperialRed, primaryColor: kImperialRed, fontFamily: 'Freshman',),
       title: 'Private Room',
       debugShowCheckedModeBanner: false,
       home: DashboardScreen(),

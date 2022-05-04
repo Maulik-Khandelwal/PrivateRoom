@@ -4,6 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_udid/flutter_udid.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:privateroom/retro/retroTextField.dart';
+import 'package:privateroom/retro/retro_button.dart';
+import 'package:privateroom/retro/stylized_container.dart';
+import 'package:privateroom/retro/stylized_text.dart';
 import 'package:privateroom/screens/messaging_screen/messaging_screen.dart';
 import 'package:privateroom/services/encryption_service.dart';
 import 'package:privateroom/utility/firebase_constants.dart';
@@ -23,6 +27,28 @@ class RoomItemWidget extends StatelessWidget {
   final context;
   final roomData;
   final showProgressIndicator;
+
+  Widget roomTitle(String text){
+    return Row(
+      children: [
+        Flexible(
+          child: RelicBazaarStackedView(
+            height: 52,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: StylizedText(
+                  text: roomData[kRoomName],
+                  style: kHeadingTextStyle.copyWith(fontSize: 24, letterSpacing: 1, height: 1.6, color: Colors.white,),
+                // maxLines: 1,
+                // softWrap: false,
+                // overflow: TextOverflow.fade,
+              ),
+            ),
+            ),
+        ),
+      ],
+    );
+  }
 
   void showError(String error) {
     Scaffold.of(context).showSnackBar(
@@ -104,19 +130,20 @@ class RoomItemWidget extends StatelessWidget {
     final passwordController = TextEditingController();
 
     final alertBorder = RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(10.0),
-      // side: BorderSide(
-      //   width: 2.0,
-      //   color: kImperialRed,
-      // ),
+      borderRadius: BorderRadius.circular(0.0),
+      side: BorderSide(
+        width: 2.0,
+        color: Colors.black,
+      ),
     );
 
     final alertStyle = AlertStyle(
+      backgroundColor: kWhite,
       animationType: AnimationType.fromTop,
       isCloseButton: true,
       isOverlayTapDismiss: false,
       alertBorder: alertBorder,
-      titleStyle: kHeadingTextStyle.copyWith(color: kSteelBlue, fontSize: 30),
+      titleStyle: kHeadingTextStyle.copyWith(color: kImperialRed, fontSize: 30),
     );
 
     final alertContent = Column(
@@ -125,23 +152,27 @@ class RoomItemWidget extends StatelessWidget {
         SizedBox(height: 5),
         Text(
           'Room ID ${roomData[kRoomId]}',
-          style: kLabelTextStyle.copyWith(color: kLightBlue),
+          style: kLabelTextStyle.copyWith(color: kBlack),
           textAlign: TextAlign.start,
         ),
         SizedBox(height: 10),
-        CardTextField(
-          iconData: FontAwesomeIcons.lock,
-          controller: passwordController,
-          labelText: 'Password',
-          obscureText: true,
-          keyboardType: TextInputType.visiblePassword,
-        ),
+        addressTextField(context, icon: CupertinoIcons.lock_fill, hint: 'Password', text: passwordController, type: TextInputType.visiblePassword),
+        // CardTextField(
+        //   iconData: FontAwesomeIcons.lock,
+        //   controller: passwordController,
+        //   labelText: 'Password',
+        //   obscureText: true,
+        //   keyboardType: TextInputType.visiblePassword,
+        // ),
       ],
     );
 
     final dialogButton = DialogButton(
+      border: Border.all(color: Colors.black, width: 2),
+      radius: BorderRadius.circular(0),
       height: 40,
-      width: 100,
+      width: 90,
+      color: kSteelBlue,
       onPressed: () => enterRoom(
         roomData[kRoomId],
         passwordController.text.trim(),
@@ -149,7 +180,7 @@ class RoomItemWidget extends StatelessWidget {
       ),
       child: Text(
         "Verify",
-        style: kGeneralTextStyle,
+        style: kGeneralTextStyle.copyWith(color: kBlack),
       ),
     );
 
@@ -170,7 +201,7 @@ class RoomItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final shape = RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(10),
+      borderRadius: BorderRadius.circular(20),
       // side: BorderSide(color: kImperialRed, width: 1),
     );
 
@@ -184,39 +215,50 @@ class RoomItemWidget extends StatelessWidget {
       horizontal: 15,
     );
 
-    final roomNameText = Text(
-      roomData[kRoomName],
-      style: kHeadingTextStyle.copyWith(fontSize: 24, letterSpacing: 1, height: 1.6, color: kSteelBlue),
-    );
+    final roomNameText = roomTitle(roomData[kRoomName]);
 
-    final roomIdText = Text(
-      'Room ID: ${roomData[kRoomId]}',
-      style: kGeneralTextStyle.copyWith(fontSize: 15, color: kLightBlue),
-    );
+    // final roomNameText = Text(
+    //   roomData[kRoomName],
+    //   style: kHeadingTextStyle.copyWith(fontSize: 24, letterSpacing: 1, height: 1.6, color: kImperialRed),
+    // );
 
-    final createdAtText = Text(
-      'created at ${roomData[kRoomCreationDate]}',
-      style: kLabelTextStyle.copyWith(fontSize: 15, color: kLightBlue),
-    );
+    final roomIdText = RichText(text: TextSpan(
+      // Here is the explicit parent TextStyle
+      style: kGeneralTextStyle.copyWith(fontSize: 15, color: kBlack, fontFamily: 'freshman', fontWeight: FontWeight.w100),
+      children: <TextSpan>[
+        const TextSpan(text: 'Room ID: ', style: TextStyle(fontWeight: FontWeight.w300, fontSize: 16)),
+        TextSpan(text: roomData[kRoomId], style: TextStyle(fontWeight: FontWeight.w100),)
+      ],
+    ),);
 
-    return Card(
-      color: Colors.white,
-      elevation: 5,
-      shape: shape,
-      margin: cardMargin,
-      child: InkWell(
-        onTap: () => showLoginDialog(context),
-        splashColor: kImperialRed.withAlpha(100),
-        child: Padding(
-          padding: contentPadding,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              roomNameText,
-              SizedBox(height: 15),
-              roomIdText,
-              createdAtText,
-            ],
+    final createdAtText = RichText(text: TextSpan(
+      // Here is the explicit parent TextStyle
+      style: kGeneralTextStyle.copyWith(fontSize: 15, color: kBlack, fontFamily: 'freshman', fontWeight: FontWeight.w100),
+      children: <TextSpan>[
+        const TextSpan(text: 'created at: ', style: TextStyle(fontWeight: FontWeight.w300, fontSize: 16)),
+        TextSpan(text: roomData[kRoomCreationDate], style: TextStyle(fontWeight: FontWeight.w100)),
+      ],
+    ),);
+
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 12),
+      child: RelicBazaarStackedView(
+        height: 126,
+        upperColor: kSteelBlue,
+        child: InkWell(
+          onTap: () => showLoginDialog(context),
+          // splashColor: kImperialRed.withAlpha(100),
+          child: Padding(
+            padding: contentPadding,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                roomNameText,
+                const SizedBox(height: 15),
+                roomIdText,
+                createdAtText,
+              ],
+            ),
           ),
         ),
       ),

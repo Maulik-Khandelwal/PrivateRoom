@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:privateroom/retro/back_button.dart';
 import 'package:privateroom/utility/ui_constants.dart';
+
+import '../../../retro/StackedView.dart';
 
 class NavItem extends StatelessWidget {
   final title;
@@ -20,17 +23,26 @@ class NavItem extends StatelessWidget {
       onTap: onTap,
       title: Text(
         title,
-        style: kTitleTextStyle.copyWith(color: kLightBlue, fontSize: 20),
+        style: kTitleTextStyle.copyWith(color: kBlack, fontSize: 20),
       ),
-      leading: Icon(
-        iconData,
-        color: kImperialRed,
-        size: 30,
+      leading: RelicBazaarStackedView(
+        upperColor: kImperialRed,
+        width: 50,
+        height: 50,
+        borderColor: Colors.white,
+        child: IconButton(
+          icon: Icon(
+            iconData,
+            color: Colors.white,
+            size: 30,
+          ),
+          onPressed: onTap,
+        ),
       ),
       subtitle: subTitle != null
           ? Text(
               subTitle,
-              style: kLightLabelTextStyle.copyWith(color: kSteelBlue),
+              style: kLightLabelTextStyle.copyWith(color: kBlack),
             )
           : null,
     );

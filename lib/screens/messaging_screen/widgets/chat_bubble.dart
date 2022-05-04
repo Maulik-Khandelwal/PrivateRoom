@@ -15,7 +15,7 @@ class ChatBubble extends StatelessWidget {
   final String password;
 
   // UI constants
-  final borderRadius = 20.0;
+  final borderRadius = 0.0;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,8 @@ class ChatBubble extends StatelessWidget {
     bool isDoodle = chatContents[kIsDoodle];
 
     final decoration = BoxDecoration(
-      color: isMe ? kImperialRed : kImperialRed.withOpacity(0.08),
+      border: isDoodle ? Border.all(width: 0, color: kImperialRed) : Border.all(width: 2, color: Colors.black),
+      color: isMe ? kImperialRed : kSteelBlue,
       borderRadius: BorderRadius.only(
         topRight: Radius.circular(isMe ? 0.0 : borderRadius),
         bottomRight: Radius.circular(isMe ? 0.0 : borderRadius),

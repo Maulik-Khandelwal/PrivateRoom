@@ -151,6 +151,7 @@ class _DrawingScreenState extends State<DrawingScreen> {
   @override
   Widget build(BuildContext context) {
     var quitItem = SpeedDialChild(
+      shape: RoundedRectangleBorder(side: BorderSide(color: Colors.black, width: 2)),
       child: Icon(FontAwesomeIcons.reply),
       backgroundColor: Colors.black,
       label: 'Exit',
@@ -158,6 +159,7 @@ class _DrawingScreenState extends State<DrawingScreen> {
       onTap: quit,
     );
     var sendItem = SpeedDialChild(
+      shape: RoundedRectangleBorder(side: BorderSide(color: Colors.black, width: 2)),
       child: Icon(FontAwesomeIcons.share),
       backgroundColor: Colors.deepOrange,
       label: 'Send',
@@ -165,6 +167,7 @@ class _DrawingScreenState extends State<DrawingScreen> {
       onTap: generateImage,
     );
     var clearItem = SpeedDialChild(
+      shape: RoundedRectangleBorder(side: BorderSide(color: Colors.black, width: 2)),
       child: Icon(FontAwesomeIcons.times),
       backgroundColor: Colors.blue,
       label: 'Clear',
@@ -172,6 +175,7 @@ class _DrawingScreenState extends State<DrawingScreen> {
       onTap: () => _points.clear(),
     );
     var penColorItem = SpeedDialChild(
+      shape: RoundedRectangleBorder(side: BorderSide(color: Colors.black, width: 2)),
       child: Icon(FontAwesomeIcons.palette),
       backgroundColor: Colors.green,
       label: 'Pen Color',
@@ -179,6 +183,7 @@ class _DrawingScreenState extends State<DrawingScreen> {
       onTap: () => chooseColor(colorFor.pen),
     );
     var strokeSizeItem = SpeedDialChild(
+      shape: RoundedRectangleBorder(side: BorderSide(color: Colors.black, width: 2)),
       child: Icon(FontAwesomeIcons.dotCircle),
       backgroundColor: Colors.orange,
       label: 'Stroke Size',
@@ -186,6 +191,7 @@ class _DrawingScreenState extends State<DrawingScreen> {
       onTap: selectStrokeSize,
     );
     var backgroundColorItem = SpeedDialChild(
+      shape: RoundedRectangleBorder(side: BorderSide(color: Colors.black, width: 2)),
       child: Icon(FontAwesomeIcons.paintRoller),
       backgroundColor: Colors.purple,
       label: 'Background Color',
@@ -195,14 +201,14 @@ class _DrawingScreenState extends State<DrawingScreen> {
 
     var floatingActionButton = SpeedDial(
       animatedIcon: AnimatedIcons.menu_close,
-      animatedIconTheme: IconThemeData(size: 22.0),
+      animatedIconTheme: IconThemeData(size: 30.0),
       curve: Curves.bounceIn,
       overlayColor: Colors.black,
       overlayOpacity: 0.5,
       backgroundColor: kImperialRed,
       foregroundColor: Colors.white,
-      elevation: 10.0,
-      shape: CircleBorder(),
+      elevation: 0.0,
+      shape: RoundedRectangleBorder(side: BorderSide(color: Colors.black, width: 2)),
       children: [
         quitItem,
         sendItem,

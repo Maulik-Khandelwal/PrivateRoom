@@ -2,12 +2,17 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:privateroom/retro/back_button.dart';
+import 'package:privateroom/retro/retroTextField.dart';
+import 'package:privateroom/retro/retro_button.dart';
 import 'package:privateroom/screens/messaging_screen/widgets/bottom_sheet_menu.dart';
 import 'package:privateroom/screens/messaging_screen/webview/browser.dart';
 import 'package:privateroom/screens/messaging_screen/widgets/chat_bubble.dart';
 import 'package:privateroom/services/encoding_decoding_service.dart';
 import 'package:privateroom/utility/firebase_constants.dart';
 import 'package:privateroom/utility/ui_constants.dart';
+
+import '../dashboard_screen/top_bar.dart';
 
 class MessagingScreen extends StatefulWidget {
   final roomData;
@@ -78,173 +83,222 @@ class _MessagingScreenState extends State<MessagingScreen> {
     final menuButton = Positioned.fill(
       child: Align(
         alignment: Alignment.centerLeft,
-        child: MaterialButton(
-          onPressed: () {
-            showModalBottomSheet(
-              isScrollControlled: true,
-              context: context,
-              builder: (ctx) => SingleChildScrollView(
-                child: BottomSheetMenu(
-                  toggleBrowser: toggleBrowser,
-                  name: widget.name,
-                  password: widget.password,
-                  chatDataCollectionReference: _chatDataCollectionRef,
-                ),
-              ),
-            );
-          },
-          minWidth: 0,
-          elevation: 5.0,
-          color: kWhite,
-          child: Icon(
-            FontAwesomeIcons.angleDoubleUp,
-            size: 25.0,
-            color: kImperialRed,
+        child: appBarBackButton(context, Icon(
+              FontAwesomeIcons.angleDoubleUp,
+              size: 25.0,
+              color: kImperialRed,
+            ),
+    () {
+        showModalBottomSheet(
+          backgroundColor: kImperialRed,
+          isScrollControlled: true,
+          context: context,
+          builder: (ctx) => SingleChildScrollView(
+            child: BottomSheetMenu(
+              toggleBrowser: toggleBrowser,
+              name: widget.name,
+              password: widget.password,
+              chatDataCollectionReference: _chatDataCollectionRef,
+            ),
           ),
-          padding: EdgeInsets.all(10.0),
-          shape: CircleBorder(),
-        ),
+        );
+      }, 40, 40)
+        // MaterialButton(
+        //   onPressed: () {
+        //     showModalBottomSheet(
+        //       isScrollControlled: true,
+        //       context: context,
+        //       builder: (ctx) => SingleChildScrollView(
+        //         child: BottomSheetMenu(
+        //           toggleBrowser: toggleBrowser,
+        //           name: widget.name,
+        //           password: widget.password,
+        //           chatDataCollectionReference: _chatDataCollectionRef,
+        //         ),
+        //       ),
+        //     );
+        //   },
+        //   minWidth: 0,
+        //   elevation: 5.0,
+        //   color: kWhite,
+        //   child: Icon(
+        //     FontAwesomeIcons.angleDoubleUp,
+        //     size: 25.0,
+        //     color: kImperialRed,
+        //   ),
+        //   padding: EdgeInsets.all(10.0),
+        //   shape: CircleBorder(),
+        // ),
       ),
     );
     final textArea = Positioned.fill(
       child: Align(
         alignment: Alignment.center,
-        child: Container(
-          margin: EdgeInsets.only(left: 50),
-          decoration: BoxDecoration(
-            color: kWhite,
-            borderRadius: BorderRadius.circular(25),
+        child: Padding(
+          padding: const EdgeInsets.only(
+            left: 50,
+            right: 50,
           ),
-          child: Padding(
-            padding: const EdgeInsets.only(
-              left: 15,
-              right: 65,
-            ),
-            child: Card(
-              color: Colors.transparent,
-              elevation: 0.0,
-              margin: EdgeInsets.all(0.0),
-              child: TextField(
-                controller: _textMessageController,
-                style: kGeneralTextStyle.copyWith(color: kBlack, fontSize: 20),
-                decoration: InputDecoration(
-                  hintText: 'Type your message...',
-                  hintStyle: kLabelTextStyle.copyWith(fontSize: 15),
-                  border: InputBorder.none,
+          child: RelicBazaarStackedView(
+            height: MediaQuery.of(context).size.height * 0.05,
+            // width: MediaQuery.of(context).size.width * 0.8,
+            child: TextField(
+                textAlign: TextAlign.start,
+                textAlignVertical: TextAlignVertical.bottom,
+                style: const TextStyle(
+                  // fontFamily: 'pix M 8pt',
+                  fontSize: 16,
+                  color: Colors.black,
                 ),
-              ),
-            ),
-          ),
+                controller: _textMessageController,
+                decoration: InputDecoration(
+                    hintText: 'Type your message...',
+                    filled: true,
+                    fillColor: Colors.white,
+                    border: InputBorder.none,
+                ),
+          )),
         ),
       ),
     );
     final sendButton = Align(
       alignment: Alignment.centerRight,
-      child: MaterialButton(
-        onPressed: () {
-          String message = _textMessageController.text.trim();
-          _textMessageController.clear();
+      child: Padding(
+        padding: const EdgeInsets.only(right: 5.0),
+        child: RelicBazaarStackedView(
+          upperColor: kImperialRed,
+          width: 50,
+          height: 50,
+          borderColor: kImperialRed,
+          child: IconButton(
+            icon: Icon(
+              FontAwesomeIcons.chevronRight,
+              size: 25.0,
+              color: kWhite,
+            ),
+            onPressed: () {
+              String message = _textMessageController.text.trim();
+              _textMessageController.clear();
 
-          if (message.isEmpty) {
-            return;
-          }
-          sendMessage(message);
-        },
-        minWidth: 0,
-        elevation: 5.0,
-        color: kImperialRed,
-        child: Icon(
-          FontAwesomeIcons.chevronRight,
-          size: 25.0,
-          color: kWhite,
+              if (message.isEmpty) {
+                return;
+              }
+              sendMessage(message);
+            },
+          ),
         ),
-        padding: EdgeInsets.all(15.0),
-        shape: CircleBorder(),
-      ),
+      )
+      // MaterialButton(
+      //   onPressed: () {
+      //     String message = _textMessageController.text.trim();
+      //     _textMessageController.clear();
+      //
+      //     if (message.isEmpty) {
+      //       return;
+      //     }
+      //     sendMessage(message);
+      //   },
+      //   minWidth: 0,
+      //   elevation: 5.0,
+      //   color: kImperialRed,
+      //   child: Icon(
+      //     FontAwesomeIcons.chevronRight,
+      //     size: 25.0,
+      //     color: kWhite,
+      //   ),
+      //   padding: EdgeInsets.all(15.0),
+      //   shape: CircleBorder(),
+      // ),
     );
 
-    final bottomTextArea = Container(
-      decoration: BoxDecoration(
-          color: kImperialRed.withOpacity(0.2),
-
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(20.0),
-            topRight: Radius.circular(20.0),
-          ),
-      ),
-      padding: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 10.0),
-      child: Stack(
-        children: <Widget>[
-          menuButton,
-          textArea,
-          sendButton,
-        ],
+    final bottomTextArea = RelicBazaarStackedView(
+      width: MediaQuery.of(context).size.width * 0.9,
+      height: 65,
+      upperColor: kSteelBlue,
+      lowerColor: Colors.black,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 7.0, vertical: 3.0),
+        child: Stack(
+          children: <Widget>[
+            menuButton,
+            textArea,
+            sendButton,
+          ],
+        ),
       ),
     );
 
     return Scaffold(
-      backgroundColor: kWhite,
-      body: SafeArea(
-        child: Column(
-          children: <Widget>[
-            showBrowser
-                ? Browser(
-                    roomId: widget.roomData[kRoomId],
-                    password: widget.password,
-                    toggleBrowser: toggleBrowser,
-                  )
-                : SizedBox.shrink(),
-            Expanded(
-              child: StreamBuilder<QuerySnapshot>(
-                stream: _chatDataCollectionRef.orderBy('date').snapshots(),
-                builder: (ctx, snapshot) {
-                  if (snapshot.data == null) {
-                    return Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
-
-                  if (snapshot.data.docs.isEmpty)
-                    return Center(
-                      child: Text(
-                        'Send your first text in this Room',
-                        style: kTitleTextStyle,
-                      ),
-                    );
-
-                  List<Widget> widgets = [];
-                  List<DocumentSnapshot> ds =
-                      snapshot.data.docs.reversed.toList();
-
-                  for (var chatData in ds) {
-                    widgets.add(ChatBubble(
-                      chatData: chatData,
-                      name: widget.name,
+      backgroundColor: Colors.white,
+      body: Stack(
+        children: [SafeArea(
+          child: Column(
+            children: <Widget>[
+              SizedBox(height: 30,),
+              showBrowser
+                  ? Browser(
+                      roomId: widget.roomData[kRoomId],
                       password: widget.password,
-                    ));
-                  }
+                      toggleBrowser: toggleBrowser,
+                    )
+                  : SizedBox.shrink(),
+              Expanded(
+                child: StreamBuilder<QuerySnapshot>(
+                  stream: _chatDataCollectionRef.orderBy('date').snapshots(),
+                  builder: (ctx, snapshot) {
+                    if (snapshot.data == null) {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
 
-                  // snapshot.data.docs.reversed.forEach((doc) {
-                  //   widgets.add(ChatBubble(
-                  //     chatData: doc,
-                  //     name: widget.name,
-                  //     password: widget.password,
-                  //   ));
-                  // });
+                    if (snapshot.data.docs.isEmpty)
+                      return Center(
+                        child: Text(
+                          'Send your first text in this Room',
+                          style: kTitleTextStyle,
+                        ),
+                      );
 
-                  return ListView.builder(
-                    reverse: true,
-                    itemCount: widgets.length,
-                    itemBuilder: (ctx, index) {
-                      return widgets[index];
-                    },
-                  );
-                },
+                    List<Widget> widgets = [];
+                    List<DocumentSnapshot> ds =
+                        snapshot.data.docs.reversed.toList();
+
+                    for (var chatData in ds) {
+                      widgets.add(ChatBubble(
+                        chatData: chatData,
+                        name: widget.name,
+                        password: widget.password,
+                      ));
+                    }
+
+                    // snapshot.data.docs.reversed.forEach((doc) {
+                    //   widgets.add(ChatBubble(
+                    //     chatData: doc,
+                    //     name: widget.name,
+                    //     password: widget.password,
+                    //   ));
+                    // });
+
+                    return ListView.builder(
+                      reverse: true,
+                      itemCount: widgets.length,
+                      itemBuilder: (ctx, index) {
+                        return widgets[index];
+                      },
+                    );
+                  },
+                ),
               ),
-            ),
-            bottomTextArea,
-          ],
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 5, 0, 12),
+                child: bottomTextArea,
+              ),
+            ],
+          ),
         ),
+          TopBar(height: 100,),
+    ]
       ),
     );
   }

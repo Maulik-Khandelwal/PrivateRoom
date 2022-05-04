@@ -31,9 +31,9 @@ class CardTextField extends StatelessWidget {
           style: kLabelTextStyle,
           controller: controller,
           decoration: InputDecoration(
-            icon: Icon(iconData, color: kSteelBlue),
+            icon: Icon(iconData, color: kImperialRed),
             labelText: labelText,
-            labelStyle: kLightLabelTextStyle.copyWith(color: kSteelBlue),
+            labelStyle: kLightLabelTextStyle.copyWith(color: kImperialRed),
             border: InputBorder.none,
           ),
         ),

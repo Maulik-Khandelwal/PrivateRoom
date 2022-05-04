@@ -1,9 +1,16 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:privateroom/retro/retro_button.dart';
 import 'package:privateroom/screens/room/pmd_page/pmd_page.dart';
 import 'package:privateroom/screens/room/pmd_select/pmd_select_page.dart';
 import 'package:privateroom/screens/room/room.dart';
 import 'package:privateroom/screens/room/time_select/time_select_page.dart';
 import 'package:privateroom/screens/room/timer_page.dart';
+
+import '../../retro/back_button.dart';
+import '../../utility/ui_constants.dart';
+import '../dashboard_screen/top_bar.dart';
 
 class RoomHome extends StatefulWidget {
   const RoomHome({Key key}) : super(key: key);
@@ -25,175 +32,125 @@ class RoomHomeState extends State<RoomHome> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Container(
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage("assets/bg.png"),
-              fit: BoxFit.cover,
-            ),
-          ),
-          child: ListView(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 32.0, vertical: 12.0),
-            children: [
-              const SizedBox(height: 20),
-              Row(
+    return Scaffold(
+      body: Stack(
+        children: [SafeArea(
+          child: Container(
+            color: kImperialRed,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 42.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Good Afternoon",
-                          style:
-                              Theme.of(context).textTheme.titleLarge?.copyWith(
-                                    fontSize: 30,
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                        ),
-                        Text(
-                          "Simrat",
-                          style:
-                              Theme.of(context).textTheme.titleLarge?.copyWith(
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                        ),
-                      ],
-                    ),
+                  const SizedBox(height: 20),
+                  const SizedBox(height: 40),
+                  const SizedBox(
+                    height: 20,
                   ),
-                  PhysicalModel(
-                    color: Colors.grey,
-                    shape: BoxShape.circle,
-                    elevation: 4,
-                    child: CircleAvatar(
-                      radius: 30,
-                      backgroundColor: const Color(0xffBDDBEC),
-                      child: Image.asset(
-                        "assets/tomato_red.png",
-                        width: 36,
-                        height: 36,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 40),
-              const SizedBox(
-                height: 20,
-              ),
-              Card(
-                color: const Color(0xffD7DEF8),
-                child: Container(
-                  padding: const EdgeInsets.all(
-                    20.0,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Today: ${dateTimetoHumanReadable(DateTime.now())}",
-                            style: Theme.of(context).textTheme.titleLarge,
-                          ),
-                          Text(
-                            "Your Study Streak: ${days.length} Days",
-                            style: Theme.of(context).textTheme.titleLarge,
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 20.0,
-                      ),
-                      const Divider(),
-                      const SizedBox(
-                        height: 10.0,
-                      ),
-                      Row(
-                        children: days
-                            .map(
-                              (e) => Expanded(
-                                child: CircleAvatar(
-                                  child: Text(e),
-                                ),
-                              ),
-                            )
-                            .toList(),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              const SizedBox(height: 20),
-              Material(
-                type: MaterialType.transparency,
-                child: Card(
-                  color: const Color(0xff8A93E9),
-                  child: InkWell(
-                    borderRadius: BorderRadius.circular(12),
-                    onTap: () => {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (_) => const Room(),
-                        ),
-                      )
-                    },
+                  RelicBazaarStackedView(
+                    upperColor: Colors.white,
+                    width: MediaQuery.of(context).size.width - 64,
+                    height: 165,
                     child: Container(
                       padding: const EdgeInsets.all(
                         20.0,
                       ),
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            "Begin a group study session",
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleLarge
-                                ?.copyWith(fontSize: 30),
-                          ),
-                          const SizedBox(
-                            height: 40.0,
-                          ),
-                          Row(
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "Invite Friends",
+                                "Today: ${dateTimetoHumanReadable(DateTime.now())}",
                                 style: Theme.of(context).textTheme.titleLarge,
                               ),
-                              const Spacer(),
-                              Row(
-                                children: const [
-                                  Icon(
-                                    Icons.message,
-                                    size: 30,
-                                  ),
-                                  SizedBox(
-                                    width: 12,
-                                  ),
-                                  Icon(
-                                    Icons.mail,
-                                    size: 30,
-                                  )
-                                ],
-                              )
+                              SizedBox(height: 7,),
+                              Text(
+                                "Your Study Streak: ${days.length} Days",
+                                style: kLabelTextStyle,
+                              ),
                             ],
+                          ),
+                          const SizedBox(
+                            height: 10.0,
+                          ),
+                          const Divider(),
+                          const SizedBox(
+                            height: 10.0,
+                          ),
+                          Row(
+                            children: days
+                                .map(
+                                  (e) => Expanded(
+                                    child: CircleAvatar(
+                                      backgroundColor: kSteelBlue,
+                                      child: Text(e, style: TextStyle(color: Colors.white),),
+                                    ),
+                                  ),
+                                )
+                                .toList(),
                           ),
                         ],
                       ),
                     ),
                   ),
-                ),
-              ),
-              const SizedBox(height: 20),
-              Material(
-                type: MaterialType.transparency,
-                child: Card(
-                  color: const Color(0xffFFE0C3),
-                  child: InkWell(
-                    borderRadius: BorderRadius.circular(14),
+                  const SizedBox(height: 20),
+                  GestureDetector(
+                    onTap: () => {
+                      Navigator.pop(context)
+                    },
+                    child: RelicBazaarStackedView(
+                      upperColor: kSteelBlue,
+                      width: MediaQuery.of(context).size.width - 64,
+                      height: 180,
+                      child: Container(
+                        padding: const EdgeInsets.all(
+                          20.0,
+                        ),
+                        child: Column(
+                          children: [
+                            Text(
+                              "Begin a group study session",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleLarge
+                                  ?.copyWith(fontSize: 30),
+                            ),
+                            const SizedBox(
+                              height: 40.0,
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  "Invite Friends",
+                                  style: Theme.of(context).textTheme.titleLarge.copyWith(color: Colors.white),
+                                ),
+                                const Spacer(),
+                                Row(
+                                  children: const [
+                                    Icon(
+                                      Icons.message,
+                                      size: 30,color: Colors.white,
+                                    ),
+                                    SizedBox(
+                                      width: 12,
+                                    ),
+                                    Icon(
+                                      Icons.mail,
+                                      size: 30,color: Colors.white,
+                                    )
+                                  ],
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  GestureDetector(
                     onTap: () => {
                       Navigator.of(context).push(
                         MaterialPageRoute(
@@ -211,38 +168,32 @@ class RoomHomeState extends State<RoomHome> {
                         ),
                       )
                     },
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 12.0,
-                        vertical: 16.0,
-                      ),
-                      child: Row(
-                        children: [
-                          Text(
-                            "Set a timer block",
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium
-                                ?.copyWith(fontSize: 22),
-                          ),
-                          const Spacer(),
-                          Image.asset(
-                            "assets/hourglass.png",
-                            height: 30,
-                            width: 30,
-                          ),
-                        ],
+                    child: RelicBazaarStackedView(
+                      upperColor: Colors.white,
+                      width: MediaQuery.of(context).size.width * 0.8,
+                      height: 55,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Row(
+                          children: [
+                            Text(
+                              "Set a timer block",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium
+                                  ?.copyWith(fontSize: 22),
+                            ),
+                            const Spacer(),
+                            const Icon(
+                              Icons.timer,
+                              size: 30,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ),
-              Material(
-                type: MaterialType.transparency,
-                child: Card(
-                  color: const Color(0xffFFD7D7),
-                  child: InkWell(
-                    borderRadius: BorderRadius.circular(14),
+                  GestureDetector(
                     onTap: () => {
                       Navigator.of(context).push(
                         MaterialPageRoute(
@@ -260,35 +211,46 @@ class RoomHomeState extends State<RoomHome> {
                         ),
                       )
                     },
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 12.0,
-                        vertical: 16.0,
-                      ),
-                      child: Row(
-                        children: [
-                          Text(
-                            "Start a pomodoro",
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium
-                                ?.copyWith(fontSize: 22),
-                          ),
-                          const Spacer(),
-                          Image.asset(
-                            "assets/tomato_black.png",
-                            height: 30,
-                            width: 30,
-                          ),
-                        ],
+                    child: RelicBazaarStackedView(
+                      upperColor: Colors.white,
+                      width: MediaQuery.of(context).size.width * 0.8,
+                      height: 55,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Row(
+                          children: [
+                            Text(
+                              "Start a pomodoro",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium
+                                  ?.copyWith(fontSize: 22),
+                            ),
+                            const Spacer(),
+                            const Icon(
+                              FontAwesomeIcons.clock,
+                              size: 30,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
+                  SizedBox(height: 30,)
+                ],
               ),
-            ],
+            ),
           ),
         ),
+          TopBar(height: 100,),
+          Align(
+              alignment: Alignment.topLeft,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(15, 100, 0, 0),
+                child: appBarBackButton(context, const Icon(Icons.arrow_back, color: kBlack), (){Navigator.pop(context);}, 35, 35),
+              )
+          )
+        ]
       ),
     );
   }

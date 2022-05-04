@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:parallax_rain/parallax_rain.dart';
 import 'package:privateroom/screens/dashboard_screen/add_room_screen.dart';
+import 'package:privateroom/screens/dashboard_screen/top_bar.dart';
 import 'package:privateroom/screens/dashboard_screen/widgets/nav_item.dart';
 import 'package:privateroom/utility/ui_constants.dart';
 
@@ -60,29 +62,40 @@ class NavBarScreen extends StatelessWidget {
       subTitle: 'File an issue on the Github Repo',
     );
 
-    return Container(
-      color: kImperialRed.withOpacity(0.03),
-      child: Row(
-        children: <Widget>[
-          Expanded(
-            child: ListView(
-              children: <Widget>[
-                sizedBox30,
-                // headingText,
-                sizedBox30,
-                navItemClose,
-                sizedBox30,
-                navItemAddRoom,
-                sizedBox30,
-                navItemAbout,
-                sizedBox30,
-                navItemReportBug,
-              ],
-            ),
+    return Stack(
+      children: [
+        Container(
+        color: Colors.white,
+        child: Stack(
+          children: [
+            // ParallaxRain(dropColors: [kSteelBlue, Color(0xff65eaea)], dropHeight: 10,),
+            Row(
+            children: <Widget>[
+              Expanded(
+                child: ListView(
+                  children: <Widget>[
+                    sizedBox30,
+                    // headingText,
+                    sizedBox30,
+                    sizedBox30,
+                    navItemClose,
+                    sizedBox30,
+                    navItemAddRoom,
+                    sizedBox30,
+                    navItemAbout,
+                    sizedBox30,
+                    navItemReportBug,
+                  ],
+                ),
+              ),
+              shrinkSizedBox,
+            ],
           ),
-          shrinkSizedBox,
-        ],
+          ]
+        ),
       ),
+      Align(child: RotatedBox(child: TopBar(height: 150,), quarterTurns: 2,), alignment: Alignment.bottomCenter,)
+      ],
     );
   }
 }
