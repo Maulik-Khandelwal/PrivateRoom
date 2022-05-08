@@ -19,7 +19,7 @@ Private Room is a retro theme-based secured end-to-end encrypted messaging appli
 Implemented with additional features like in-sync web browsing and doodle sharing. There's a demonstration of the working to the right ⟶
 
 
-<!-- <br>
+<br>
 
 ## Table of Contents
 
@@ -39,20 +39,6 @@ To install Junior you can find the [current release on the Play Store](https://p
 
 <br>
 
-## Usage
+<h2 align= "left"><b>Here's some Sneak Peek🧐</b></h2>
 
-As it is right now the app lets you View your reading list in a far better way than any notepad would. The initial homescreen shows your novel list and sort
-order (Alphabetical, Most Recent, Rating or by Novel Status). You can also search for a particular entry with the search bar.
-
-The Details you can log for any novel are:
-
-- Title
-- Current and Total Chapters
-- Current and Total Volumes
-- Novel Status (Ongong, Complete, To Read, On Hiatus)
-- Personal Rating
-- Link to the Novel/Current Chapter
-- Novel Tags (CN, EN, JP, KR, Xianxia, etc. you get the point)
-- Chapter Notes or Novel Review
-
-<br> -->
+<p align= "center"><img width=30% height=30% src="images/splash.gif">&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<img width=30% height=30% src="images/transition.gif"></p>
