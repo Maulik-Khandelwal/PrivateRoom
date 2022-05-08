@@ -41,4 +41,10 @@ To install Junior you can find the [current release on the Play Store](https://p
 
 <h2 align= "left"><b>Here's some Sneak Peek🧐</b></h2>
 
-<p align= "center"><img width=30% height=30% src="images/splash.gif">&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<img width=30% height=30% src="images/transition.gif"></p>
+<p align= "center"><img width=30% height=30% src="Screenshots/Rooms.jpg">&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<img width=30% height=30% src="Screenshots/Nav bar.jpg"></p>
+<p align= "center"><img width=30% height=30% src="Screenshots/New room.jpg">&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<img width=30% height=30% src="Screenshots/Password.jpg"></p>
+<p align= "center"><img width=30% height=30% src="Screenshots/Room Home.jpg">&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<img width=30% height=30% src="Screenshots/Chats.jpg"></p>
+<p align= "center"><img width=30% height=30% src="Screenshots/Bottom Sheet.jpg">&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<img width=30% height=30% src="Screenshots/Doodle.jpg"></p>
+<p align= "center"><img width=30% height=30% src="Screenshots/Doodle options.jpg">&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<img width=30% height=30% src="Screenshots/Doodle chat.jpg"></p>
+<p align= "center"><img width=30% height=30% src="Screenshots/Webview.jpg">&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<img width=30% height=30% src="Screenshots/Webview full.jpg"></p>
+<p align= "center"><img width=30% height=30% src="Screenshots/Study.jpg">&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<img width=30% height=30% src="Screenshots/Pomodoro.jpg"></p>
