@@ -1,5 +1,6 @@
-![banner](https://github.com/Maulik-Khandelwal/PrivateRoom/blob/master/Images/Icon.png)
-
+<p align="center">
+  <img src="https://github.com/Maulik-Khandelwal/PrivateRoom/blob/master/Images/Icon.png">
+</p>
 ![Dart](https://img.shields.io/badge/Dart-blue?style=for-the-badge&logo=dart&logoColor=white)
 ![Flutter](https://img.shields.io/badge/Flutter-lightblue?style=for-the-badge&logo=flutter&logoColor=darkblue)
 ![Android](https://img.shields.io/badge/Android-lightgreen?style=for-the-badge&logo=android&logoColor=darkgreen)
