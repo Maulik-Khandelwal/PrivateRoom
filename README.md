@@ -1,7 +1,11 @@
-![banner]("https://github.com/Maulik-Khandelwal/PrivateRoom/blob/master/Images/Icon.png")
+<p align= "center"><img src="https://github.com/Maulik-Khandelwal/PrivateRoom/blob/master/Images/Icon.png"></p>
+ 
+<div align="center">
+	
 ![Dart](https://img.shields.io/badge/Dart-blue?style=for-the-badge&logo=dart&logoColor=white)
 ![Flutter](https://img.shields.io/badge/Flutter-lightblue?style=for-the-badge&logo=flutter&logoColor=darkblue)
 ![Android](https://img.shields.io/badge/Android-lightgreen?style=for-the-badge&logo=android&logoColor=darkgreen)
+![Android](https://img.shields.io/badge/Firebase-lightyellow?style=for-the-badge&logo=firebase&logoColor=orange)
 ![PR](https://img.shields.io/badge/PRs-welcome-red?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-GPL3-purple?style=for-the-badge)
 ![OpenSource](https://img.shields.io/badge/Open%20Source-greun?style=for-the-badge)
@@ -10,15 +14,12 @@
 
 <img align="right" width="250" src="https://github.com/OverPoweredDev/Junior/blob/master/misc/Junior_demo.gif" alt="Junior demo">
 
-Junior dares! to make a novel bookmarking app specialised for online webnovels. Initially inspired
-by [this thread](https://www.reddit.com/r/noveltranslations/comments/p8hx5a/i_want_to_know_if_anyone_does_this_too_and_if_not/h9qt309) on r/noveltranslations, I
-wanted to create a novel managing app that can handle more data than any notes taker, while also looking way better and still being as easy to use.
-
-Junior is an open-source Android app that helps you catalogue the novel you're reading and your progress on it. Apart from these details, you can also log your
-personal rating and any chapter notes for the current novel. There's a demonstration of the working to the right ⟶
+Private Room is a retro theme-based secured end-to-end encrypted messaging application built using Flutter and Firebase. Provides 256 bit AES encryption to all your messages and browsing.
+	
+Implemented with additional features like in-sync web browsing and doodle sharing. There's a demonstration of the working to the right ⟶
 
 
-<br>
+<!-- <br>
 
 ## Table of Contents
 
@@ -54,139 +55,4 @@ The Details you can log for any novel are:
 - Novel Tags (CN, EN, JP, KR, Xianxia, etc. you get the point)
 - Chapter Notes or Novel Review
 
-<br>
-
-## Development
-
-I intend to make this a proper open-source project so the following sections are about developing and modifying the existing app. There's stuff from Navigation
-to Contribution Guidelines so do check it out if you're helping out!
-
-### Navigation
-
-```shell
-Junior/
-├── assets/
-│   └── banner.png
-├── README.md
-└── src/
-    ├── android/..
-    ├── build/..
-    ├── assets/..
-    ├── test/..
-    ├── lib/
-    │   ├── details_page/
-    │   │   ├── body.dart
-    │   │   └── components/..
-    │   ├── home_page/
-    │   │   ├── body.dart
-    │   │   └── components/..
-    │   ├── model
-    │   │   └── novel.dart
-    │   ├── main.dart
-    │   └── theme.dart
-    ├── pubspec.lock
-    ├── pubspec.yaml
-    └── src.iml
-```
-
-In case it's not obvious, `src/` contains all source files for the application, top level `assets/` contains assets for the repo and README, `assets/` in `src/`
-contains application data like the icon and all.
-
-I've divided the application into subdirectories the way it makes sense to me. `main.dart` runs the entire thing, `theme.dart` contains constants for commonly
-used colors and more. The only model is `novel.dart`, which contains code for the Novel class, its attributes and all methods involving reading and writing to
-memory.
-
-<br>
-
-```shell
-flutter_screen
-├── body.dart/
-└── components/
-    ├── button.dart
-    ├── list_tile.dart
-    ├── searchbar.dart
-    └── title.dart
-```
-
-A page looks something like above, with a body and a subdirectory of widget components. `body.dart` contains only top level information on how to place the
-widgets while the actual widgets will be in `components/`. Even if it's something as simple as a `Text()`, please make a separate class for it, it makes it
-super easy to re-arrange stuff later on.
-
-And that's about it for navigation! This is the layout that I feel is most intuitive and easy to work with tbh.
-
-<br>
-
-### Getting Started
-
-1. Fork this repository to your account by clicking the “Fork” button on top-right of the repository page.
-
-	<img src="https://i.postimg.cc/3wn7mr1j/fork.png" alt="Fork" width="700">
-
-
-2. Now, you will see copy of this repository in your account.
-
-	<img src="https://i.postimg.cc/k5XPJ3C2/repo.png" alt="Repo" width="700">
-
-
-3. Next, clone this repository to your machine with help of IDE or you can do it with command line as well. Use below command to clone it
-
-		git clone https://github.com/<your-user-name>/Junior
-	
-	For Android Studio, you can clone it using "Get from Version Control" in VCS.
-	
-	<img src="https://i.postimg.cc/Kj4YR3yg/clone.png" alt="Android Studio" width="700">
-	
-	
-4. Open this downloaded project in your IDE i.e. Android Studio, Visual Studio Code etc. 
-    
- 	 - For Android Studio go to Junior -> src -> lib -> main.dart and select "Enable Dart Support" option in top right corner.
-   
- 	 - Then, go to Junior -> src -> test -> pubspec.yaml and select "Get Dependencies" option.
-   
-	  - Now, open AVD Manager in android studio and run your virtual device.
-   
- 	 - Run the Project file and the application will get install on virtual device.
- 	 
-5. On App's home screen you will see various options like "Add New Novel", Setting, progress of ongoing novel and few other options. You are ready to Explore the app now :)
-	
-6. Create new branch and edit all the changes into it.
-
-7. After changes completed, commit the changes and push it to github.
-
-8. Now go to github repository and you will see the option "Compare and Create Pull Request". Click on it, review changes and create new Pull Request.
-
-	<img src="https://i.postimg.cc/JnpNqqMw/pull.png" alt="Pull Request" width="700" >
-
-<br>
-
-### Contributing
-
-Any and all contributions are welcome! As Junior is a project in release, changes to the source code won't be immediately accepted (they will be marked complete
-for HacktoberFest, don't worry). In case it's a new feature or something not mentioned below, just create an issue beforehand please. Also do add your name and
-account to the Maintainer's Section of CONTRIBUTING.md with your Pull Request!
-
-Contributions regarding the below are especially appreciated!
-
-- Contributing to the README (The TODO parts, mainly 😅)
-- Adding Pages to the Wiki
-- Minor changes/refactors to the Flutter Code
-- Adding features to the Application requested by users
-- Adding tests for the app
-
-One thing I ask of you guys is to follow the directory structure as shown in [this section](#navigation). Also run the following commands before any pull
-request so that it doesn't cause issues with the linter. And fix any minor issues it brings up!
-
-```shell
-flutter format --set-exit-if-changed .
-flutter analyze .
-```
-
-<br>
-
-## Other Stuff
-
-Stuff I need to add or attribute but didn't get a place in the section before
-
-- [Icon Source](https://www.rawpixel.com/image/2869824/free-illustration-image-reading-book-books-images-earth-tone)
-- [StarRating Widget Source](https://gist.github.com/sma/1f22ef926ef878f10915aa9e00bc9eaa)
-- [About Me](https://github.com/OverPoweredDev)
+<br> -->
