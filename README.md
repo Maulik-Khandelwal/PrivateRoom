@@ -6,9 +6,6 @@
 ![Flutter](https://img.shields.io/badge/Flutter-lightblue?style=for-the-badge&logo=flutter&logoColor=darkblue)
 ![Android](https://img.shields.io/badge/Android-lightgreen?style=for-the-badge&logo=android&logoColor=darkgreen)
 ![Android](https://img.shields.io/badge/Firebase-lightyellow?style=for-the-badge&logo=firebase&logoColor=orange)
-![PR](https://img.shields.io/badge/PRs-welcome-red?style=for-the-badge)
-![License](https://img.shields.io/badge/License-GPL3-purple?style=for-the-badge)
-![OpenSource](https://img.shields.io/badge/Open%20Source-greun?style=for-the-badge)
 
 <br>
 
@@ -19,6 +16,9 @@ Private Room is a retro theme-based secured end-to-end encrypted messaging appli
 Implemented with additional features like in-sync web browsing and doodle sharing. There's a demonstration of the working to the right ⟶
 
 <br>
+
+<h1><b>Building “Private Room”</b></h1>
+	
 <div align="left">
 <h3>How to implement end-to-end-encryption?</h3>
 
